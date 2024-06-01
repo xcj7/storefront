@@ -19,8 +19,10 @@
 ///////////////////////////////////////////////////
 // NoteDetail.js
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import notes from '../assets/data';
+import {ReactComponent as ArrowLeft} from '../assets/arrow-left.svg'
+// myfirstreactapp\yourfirstapp\src\assets\arrow-left.svg
 
 const NotePage = () => {
 const { id } = useParams();
@@ -32,8 +34,16 @@ const { id } = useParams();
   const foundNote = notes.find(note => note.id === noteId);
 
   return (
-    <div>
-      {foundNote ? (
+    <div className='note'>
+      <div className='note-header'>
+        <h3> 
+          <Link to="/">
+            <ArrowLeft />
+          </Link>
+        <textarea value={foundNote?.body}>
+        </textarea>
+
+        {foundNote ? (
         <div>
           <h1>Note ID: {foundNote?.id}</h1>
           <p>Content: {foundNote?.body}</p>
@@ -43,6 +53,10 @@ const { id } = useParams();
       ) : (
         <p>Note not found</p>
       )}
+      
+        </h3>
+      </div>
+      
     </div>
   );
 };
